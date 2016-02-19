@@ -16,12 +16,9 @@
 
 package org.hibernate.cache.redis.strategy;
 
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cache.redis.regions.RedisTransactionalDataRegion;
 import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
-
-import java.util.Comparator;
 
 /**
  * Superclass for all Redis specific read/write AccessStrategy implementations.
@@ -30,18 +27,14 @@ import java.util.Comparator;
  * @author sunghyouk.bae@gmail.com
  * @since 13. 4. 5. 오후 10:07
  */
-@Slf4j
 public class AbstractReadWriteRedisAccessStrategy<T extends RedisTransactionalDataRegion>
         extends AbstractRedisAccessStrategy<T> {
-
-    private final Comparator versionComparator;
 
     /**
      * Creates a read/write cache access strategy around the given cache region.
      */
     public AbstractReadWriteRedisAccessStrategy(T region, Settings settings) {
         super(region, settings);
-        this.versionComparator = region.getCacheDataDescription().getVersionComparator();
     }
 
     /**

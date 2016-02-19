@@ -1,13 +1,12 @@
 package org.hibernate.examples.utils;
 
-import lombok.Cleanup;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import lombok.Cleanup;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * org.hibernate.examples.utils.BinarySerializer
@@ -20,7 +19,7 @@ public class BinarySerializer {
 
     public byte[] serialize(Object graph) {
         if (graph == null)
-            return ArrayUtils.EMPTY_BYTE_ARRAY;
+            return new byte[]{};
 
         try {
             @Cleanup ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -38,7 +37,7 @@ public class BinarySerializer {
 
     @SuppressWarnings("unchecked")
     public <T> T deserialize(byte[] bytes, Class<T> clazz) {
-        if (ArrayUtils.isEmpty(bytes))
+        if (bytes == null || bytes.length == 0)
             return (T) null;
 
         try {

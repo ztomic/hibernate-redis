@@ -450,8 +450,7 @@ public class JedisClient {
     private byte[] rawKey(final Object key) {
         return keySerializer.serialize(key.toString());
     }
-
-    @SuppressWarnings("unchecked")
+    
     private byte[][] rawKeys(final Collection<?> keys) {
         byte[][] rawKeys = new byte[keys.size()][];
         int i = 0;
@@ -510,7 +509,7 @@ public class JedisClient {
         try {
             return callback.execute(jedis);
         } finally {
-            jedisPool.returnResource(jedis);
+            jedis.close();
         }
     }
 
@@ -528,7 +527,7 @@ public class JedisClient {
             callback.execute(tx);
             return tx.exec();
         } finally {
-            jedisPool.returnResource(jedis);
+        	jedis.close();
         }
     }
 
@@ -546,7 +545,7 @@ public class JedisClient {
             // use #sync(), not #exec()
             pipeline.sync();
         } finally {
-            jedisPool.returnResource(jedis);
+        	jedis.close();
         }
     }
 

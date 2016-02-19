@@ -18,6 +18,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -26,7 +28,6 @@ import java.util.Properties;
  * @author 배성혁 sunghyouk.bae@gmail.com
  * @since 13. 8. 28. 오후 9:33
  */
-@Slf4j
 @Configuration
 public class HibernateRedisConfiguration {
 
@@ -76,7 +77,12 @@ public class HibernateRedisConfiguration {
         config.setInitializationFailFast(true);
         config.setConnectionTestQuery("SELECT 1");
 
-        return new HikariDataSource(config);
+        return new HikariDataSource(config) {
+        	@Override
+        	public Connection getConnection(String username, String password) throws SQLException {
+        		return getConnection();
+        	}
+        };
 
 //        return new EmbeddedDatabaseBuilder()
 //                .setType(EmbeddedDatabaseType.H2)

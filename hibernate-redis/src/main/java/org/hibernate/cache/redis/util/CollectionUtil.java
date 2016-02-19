@@ -16,7 +16,6 @@
 
 package org.hibernate.cache.redis.util;
 
-import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -28,17 +27,7 @@ import java.util.Set;
 public abstract class CollectionUtil {
 
     private CollectionUtil() {}
-
-    public static String toString(Collection<?> collection) {
-        StringBuilder sb = new StringBuilder(collection.size() * 2);
-
-        for (Object item : collection) {
-            sb.append(item).append(",");
-        }
-        // sb.deleteCharAt(sb.lastIndexOf(","));
-        return sb.toString();
-    }
-
+    
     public static byte[][] toArray(Set<byte[]> set) {
         if (set == null || set.size() == 0)
             return new byte[0][];

@@ -1,13 +1,16 @@
 package org.hibernate.examples.utils;
 
-import com.jolbox.bonecp.BoneCPDataSource;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import lombok.extern.slf4j.Slf4j;
-
-import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * {@link javax.sql.DataSource} 를 생성, 제공하는 Helper Object 입니다.
@@ -89,39 +92,12 @@ public class DataSources {
         config.setInitializationFailFast(true);
         config.setConnectionTestQuery("SELECT 1");
 
-        return new HikariDataSource(config);
-    }
-
-    /**
-     * BoneCP DataSource 를 빌드합니다.
-     *
-     * @param driverClass DriverClass 명
-     * @param url         Database 주소
-     * @param username    사용자 명
-     * @param passwd      사용자 패스워드
-     * @return [[javax.sql.DataSource]] 인스턴스
-     */
-    public static DataSource getBoneCPDataSource(String driverClass, String url, String username, String passwd) {
-
-        BoneCPDataSource ds = new BoneCPDataSource();
-        ds.setDriverClass(driverClass);
-        ds.setJdbcUrl(url);
-        ds.setUser(username);
-        ds.setPassword(passwd);
-
-        int processCount = Runtime.getRuntime().availableProcessors();
-
-        ds.setMaxConnectionsPerPartition(100);
-        ds.setMinConnectionsPerPartition(processCount);
-        ds.setPartitionCount(4);
-
-        ds.setIdleMaxAgeInSeconds(120);
-        ds.setIdleConnectionTestPeriodInSeconds(60);
-        ds.setMaxConnectionAgeInSeconds(300);
-
-        ds.setDisableJMX(true);
-
-        return ds;
+        return new HikariDataSource(config) {
+        	@Override
+        	public Connection getConnection(String username, String password) throws SQLException {
+        		return super.getConnection();
+        	}
+        };
     }
 
     /**

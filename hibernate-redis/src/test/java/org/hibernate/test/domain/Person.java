@@ -1,16 +1,24 @@
 package org.hibernate.test.domain;
 
-import com.google.common.base.Objects;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * org.hibernate.test.domain.Person
@@ -64,6 +72,6 @@ public class Person implements Serializable {
     public int hashCode() {
         return (id != null)
                 ? id.hashCode()
-                : Objects.hashCode(firstname, lastname, weight, height, age);
+                : Objects.hash(firstname, lastname, weight, height, age);
     }
 }

@@ -103,6 +103,9 @@ public final class JedisTool {
             if (is != null) {
                 try { is.close(); } catch (Exception ignored) { }
             }
+            if (cacheProps.isEmpty()) {
+            	cacheProps.putAll(props);
+            }
         }
         return cacheProps;
     }

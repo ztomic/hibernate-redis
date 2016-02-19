@@ -16,7 +16,8 @@
 
 package org.hibernate.cache.redis.regions;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.Properties;
+
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.redis.jedis.JedisClient;
 import org.hibernate.cache.redis.strategy.RedisAccessStrategyFactory;
@@ -25,8 +26,6 @@ import org.hibernate.cache.spi.EntityRegion;
 import org.hibernate.cache.spi.access.AccessType;
 import org.hibernate.cache.spi.access.EntityRegionAccessStrategy;
 import org.hibernate.cfg.Settings;
-
-import java.util.Properties;
 
 /**
  * An entity region specific wrapper around an Redis.
@@ -37,7 +36,6 @@ import java.util.Properties;
  * @author sunghyouk.bae@gmail.com
  * @since 13. 4. 5. 오후 8:51
  */
-@Slf4j
 public class RedisEntityRegion extends RedisTransactionalDataRegion implements EntityRegion {
 
     public RedisEntityRegion(RedisAccessStrategyFactory accessStrategyFactory,

@@ -16,8 +16,6 @@
 
 package org.hibernate.cache.redis.strategy;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cache.redis.jedis.JedisClient;
 import org.hibernate.cache.redis.regions.RedisNaturalIdRegion;
 import org.hibernate.cache.spi.NaturalIdRegion;
@@ -25,13 +23,14 @@ import org.hibernate.cache.spi.access.NaturalIdRegionAccessStrategy;
 import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
 
+import lombok.Getter;
+
 /**
  * TransactionalRedisNaturalIdRegionAccessStrategy
  *
  * @author sunghyouk.bae@gmail.com
  * @since 13. 4. 5. 오후 11:14
  */
-@Slf4j
 public class TransactionalRedisNaturalIdRegionAccessStrategy
         extends AbstractRedisAccessStrategy<RedisNaturalIdRegion>
         implements NaturalIdRegionAccessStrategy {

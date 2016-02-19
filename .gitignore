@@ -1,21 +1,4 @@
-*.class
-*.log
-*.iml
-.idea
-.lucene
-.DS_Store
+.project
+.settings
+target/
 .classpath
-target
-bin
-
-# Package Files #
-# *.jar
-*.war
-*.ear
-
-# Gradle
-.gradle
-build
-
-generated
-generatedTest

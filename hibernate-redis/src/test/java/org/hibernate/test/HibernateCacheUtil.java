@@ -1,4 +1,4 @@
-package org.hibernate.cache.redis.util;
+package org.hibernate.test;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.internal.SessionFactoryImpl;

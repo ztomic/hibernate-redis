@@ -155,9 +155,9 @@ public abstract class RedisDataRegion implements Region {
     public long getElementCountOnDisk() {
         return -1;
     }
-
-    @SuppressWarnings("unchecked")
-    @Override
+    
+    @SuppressWarnings("rawtypes")
+	@Override
     public Map toMap() {
         try {
             return redis.hgetAll(name);

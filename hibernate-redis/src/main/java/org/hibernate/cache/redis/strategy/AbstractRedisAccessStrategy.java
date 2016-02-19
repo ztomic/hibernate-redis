@@ -16,7 +16,6 @@
 
 package org.hibernate.cache.redis.strategy;
 
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cache.redis.regions.RedisTransactionalDataRegion;
 import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
@@ -27,7 +26,6 @@ import org.hibernate.cfg.Settings;
  * @author sunghyouk.bae@gmail.com
  * @since 13. 4. 5. 오후 10:07
  */
-@Slf4j
 abstract class AbstractRedisAccessStrategy<T extends RedisTransactionalDataRegion> {
 
     protected final T region;
